@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalizar pedido | KRAS Engenharia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra de anúncio superior -->
+  <div class="topbar">
+    <p>Compra rápida &nbsp;•&nbsp; Sem cadastro obrigatório &nbsp;•&nbsp; Envio rápido para todo o Brasil</p>
+  </div>
+
+  <!-- Navegação -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <img src="logo-kras.png" alt="KRAS" class="logo-img">
+        <span class="logo-text">KRAS <span class="logo-sub">Soluções em inspeção e engenharia</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">Voltar ao site</a>
+        <a href="#ajuda">Ajuda</a>
+      </nav>
+      <a href="/" class="btn btn-outline btn-nav">Início</a>
+    </div>
+  </header>
+
+  <!-- ÁREA DE COMPRA / LOGIN -->
+  <section class="login-wrap">
+    <div class="login-inner">
+
+      <!-- Coluna de apresentação -->
+      <div class="login-side">
+        <span class="badge-soft">Finalize sua compra em minutos</span>
+        <h1>Preencha o pedido.</h1>
+        <h1>Receba o link de pagamento.</h1>
+        <p class="login-side-sub">
+          Sem cadastro complicado: informe o produto, seus dados e pronto —
+          nossa equipe confirma a disponibilidade e envia o
+          <strong>link de pagamento</strong> para o seu e-mail e WhatsApp.
+          Já é cliente? É só <strong>entrar na conta</strong> que preparamos tudo por você.
+        </p>
+        <ul class="login-perks">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Pedido em minutos, sem criar conta</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Seus dados são usados apenas para este pedido</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Pagamento por PIX, cartão ou boleto</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Cliente com conta acompanha tudo: pedidos, notas e certificados</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card do formulário -->
+      <div class="login-card">
+        <div class="tabs" role="tablist">
+          <button type="button" class="tab ativo" id="tabPedido" role="tab">Finalizar pedido</button>
+          <button type="button" class="tab" id="tabEntrar" role="tab">Entrar na conta</button>
+        </div>
+
+        <!-- FORMULÁRIO: PEDIDO -->
+        <form id="formPedido" class="form ativo" novalidate>
+          <div class="campo">
+            <label for="produto">Produto</label>
+            <input type="text" id="produto" placeholder="Ex.: Hikmicro B10S" autocomplete="off">
+            <small class="erro" id="erroProduto">Informe o produto desejado.</small>
+          </div>
+
+          <div class="campo">
+            <label for="qtyInput">Quantidade</label>
+            <div class="qty">
+              <button type="button" id="qtyMenos" aria-label="Diminuir">−</button>
+              <input type="number" id="qtyInput" min="1" max="99" value="1">
+              <button type="button" id="qtyMais" aria-label="Aumentar">+</button>
+              <span class="qty-unid" id="qtyUnid">unidade</span>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="respNome">Nome do responsável</label>
+            <input type="text" id="respNome" placeholder="Nome completo do responsável" autocomplete="name">
+            <small class="erro" id="erroRespNome">Informe o nome completo do responsável.</small>
+          </div>
+
+          <div class="campo">
+            <label for="empresa">Nome da empresa</label>
+            <input type="text" id="empresa" placeholder="Razão social ou nome fantasia" autocomplete="organization">
+            <small class="erro" id="erroEmpresa">Informe o nome da empresa.</small>
+          </div>
+
+          <div class="campo">
+            <label for="doc">CPF ou CNPJ <span class="hint">(a máscara se adapta aos dígitos)</span></label>
+            <input type="text" id="doc" placeholder="000.000.000-00 ou 00.000.000/0000-00" inputmode="numeric" maxlength="18" autocomplete="off">
+            <small class="ok-label" id="docTipo">—</small>
+            <small class="erro" id="erroDoc">Documento inválido. Verifique os dígitos.</small>
+          </div>
+
+          <div class="campo">
+            <label for="fone">Telefone</label>
+            <input type="tel" id="fone" placeholder="(00) 00000-0000" inputmode="tel" maxlength="15" autocomplete="tel">
+            <small class="erro" id="erroFone">Informe um telefone válido com DDD.</small>
+          </div>
+
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="voce@empresa.com.br" autocomplete="email">
+            <small class="erro" id="erroEmail">Informe um e-mail válido.</small>
+          </div>
+
+          <div class="resumo-pedido" id="resumoPedido"></div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-full">Enviar pedido</button>
+          <p class="form-aviso">
+            Ao enviar, você concorda com os <a href="#">termos de uso</a> e a
+            <a href="#">política de privacidade</a> da KRAS.
+          </p>
+        </form>
+
+        <!-- FORMULÁRIO: ENTRAR -->
+        <form id="formEntrar" class="form" novalidate>
+          <p class="form-intro">Já é cliente? Entre com seu e-mail e documento para continuar a compra com seus dados salvos.</p>
+
+          <div class="campo">
+            <label for="emailLogin">E-mail</label>
+            <input type="email" id="emailLogin" placeholder="voce@empresa.com.br" autocomplete="username">
+            <small class="erro" id="erroEmailLogin">Informe um e-mail válido.</small>
+          </div>
+
+          <div class="campo">
+            <label for="docLogin">CPF ou CNPJ <span class="hint">(a máscara se adapta aos dígitos)</span></label>
+            <input type="text" id="docLogin" placeholder="000.000.000-00 ou 00.000.000/0000-00" inputmode="numeric" maxlength="18" autocomplete="off">
+            <small class="ok-label" id="docTipoLogin">—</small>
+            <small class="erro" id="erroDocLogin">Documento inválido. Verifique os dígitos.</small>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-full">Entrar e continuar</button>
+
+          <p class="form-links">
+            <a href="#">Esqueci meu e-mail ou documento</a>
+          </p>
+        </form>
+
+        <!-- Confirmação (simulada até integrar com o backend) -->
+        <div class="sucesso" id="sucesso" hidden>
+          <div class="sucesso-icone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <h2 id="sucessoTitulo">Pedido enviado!</h2>
+          <p id="sucessoTexto">Nossa equipe confirma a disponibilidade e envia o link de pagamento para o seu e-mail e WhatsApp.</p>
+          <button type="button" class="btn btn-outline" id="btnVoltar">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo-kras.png" alt="KRAS" class="logo-img logo-img-sm">
+        <span>KRAS <span>Engenharia</span></span>
+      </div>
+      <p>Dúvidas no pedido? WhatsApp 11 93020-3201 • comercial@krasengenharia.com.br</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      /* ============ ABAS ============ */
+      var tabPedido = document.getElementById('tabPedido');
+      var tabEntrar = document.getElementById('tabEntrar');
+      var formPedido = document.getElementById('formPedido');
+      var formEntrar = document.getElementById('formEntrar');
+
+      function mostrarForm(qual) {
+        var ped = qual === 'pedido';
+        tabPedido.classList.toggle('ativo', ped);
+        tabEntrar.classList.toggle('ativo', !ped);
+        formPedido.classList.toggle('ativo', ped);
+        formEntrar.classList.toggle('ativo', !ped);
+      }
+
+      tabPedido.addEventListener('click', function () { mostrarForm('pedido'); });
+      tabEntrar.addEventListener('click', function () { mostrarForm('entrar'); });
+
+      /* ============ MÁSCARA ADAPTATIVA CPF / CNPJ ============ */
+      /* Até 11 dígitos  -> CPF   000.000.000-00
+         12 a 14 dígitos -> CNPJ  00.000.000/0000-00
+         A máscara troca sozinha conforme o usuário digita. */
+      function mascaraDoc(valor) {
+        var d = valor.replace(/\D/g, '');
+
+        if (d.length <= 11) {
+          d = d.slice(0, 11);
+          d = d.replace(/^(\d{3})(\d)/, '$1.$2');
+          d = d.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+          d = d.replace(/\.(\d{3})(\d{1,2})$/, '.$1-$2');
+        } else {
+          d = d.slice(0, 14);
+          d = d.replace(/^(\d{2})(\d)/, '$1.$2');
+          d = d.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+          d = d.replace(/\.(\d{3})(\d)/, '.$1/$2');
+          d = d.replace(/(\d{4})(\d{1,2})$/, '$1-$2');
+        }
+        return d;
+      }
+
+      function tipoDoc(valor) {
+        var d = valor.replace(/\D/g, '');
+        if (d.length === 11) return 'CPF';
+        if (d.length === 14) return 'CNPJ';
+        return '';
+      }
+
+      /* Validação real: dígitos verificadores de CPF e CNPJ */
+      function validarCPF(d) {
+        if (!/^\d{11}$/.test(d) || /^(\d)\1{10}$/.test(d)) return false;
+        var soma = 0, i;
+        for (i = 0; i < 9; i++) soma += parseInt(d[i], 10) * (10 - i);
+        var dv1 = (soma * 10) % 11; if (dv1 === 10) dv1 = 0;
+        if (dv1 !== parseInt(d[9], 10)) return false;
+        soma = 0;
+        for (i = 0; i < 10; i++) soma += parseInt(d[i], 10) * (11 - i);
+        var dv2 = (soma * 10) % 11; if (dv2 === 10) dv2 = 0;
+        return dv2 === parseInt(d[10], 10);
+      }
+
+      function validarCNPJ(d) {
+        if (!/^\d{14}$/.test(d) || /^(\d)\1{13}$/.test(d)) return false;
+        var calc = function (base, pesos) {
+          var soma = 0;
+          for (var i = 0; i < base.length; i++) soma += parseInt(base[i], 10) * pesos[i];
+          var resto = soma % 11;
+          return resto < 2 ? 0 : 11 - resto;
+        };
+        var p1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        var p2 = [6].concat(p1);
+        return calc(d.slice(0, 12), p1) === parseInt(d[12], 10) &&
+               calc(d.slice(0, 13), p2) === parseInt(d[13], 10);
+      }
+
+      function docValido(valor) {
+        var d = valor.replace(/\D/g, '');
+        if (d.length === 11) return validarCPF(d);
+        if (d.length === 14) return validarCNPJ(d);
+        return false;
+      }
+
+      /* ============ MÁSCARA DE TELEFONE ============ */
+      function mascaraFone(valor) {
+        var d = valor.replace(/\D/g, '').slice(0, 11);
+        if (d.length <= 2) return d.length ? '(' + d : '';
+        if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+        if (d.length === 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+        return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+      }
+
+      function validarFone(valor) {
+        var d = valor.replace(/\D/g, '');
+        if (d.length !== 10 && d.length !== 11) return false;
+        var ddd = parseInt(d.slice(0, 2), 10);
+        if (ddd < 11 || ddd > 99) return false;
+        if (d.length === 11 && d[2] !== '9') return false;
+        return true;
+      }
+
+      function emailValido(valor) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor.trim());
+      }
+
+      /* ============ LIGAÇÃO DOS CAMPOS ============ */
+      function ligarDoc(idInput, idTipo, idErro) {
+        var input = document.getElementById(idInput);
+        var tipo = document.getElementById(idTipo);
+        var erro = document.getElementById(idErro);
+
+        input.addEventListener('input', function () {
+          input.value = mascaraDoc(input.value);
+          var t = tipoDoc(input.value);
+          if (t === 'CPF') {
+            tipo.textContent = 'Detectado: CPF (11 dígitos)';
+            tipo.className = 'ok-label visivel';
+          } else if (t === 'CNPJ') {
+            tipo.textContent = 'Detectado: CNPJ (14 dígitos)';
+            tipo.className = 'ok-label visivel';
+          } else {
+            tipo.textContent = '—';
+            tipo.className = 'ok-label';
+          }
+          input.classList.remove('invalido');
+          erro.classList.remove('visivel');
+        });
+      }
+
+      function estadoCampo(input, erro, ok) {
+        if (ok) {
+          input.classList.remove('invalido');
+          erro.classList.remove('visivel');
+        } else {
+          input.classList.add('invalido');
+          erro.classList.add('visivel');
+        }
+      }
+
+      ligarDoc('doc', 'docTipo', 'erroDoc');
+      ligarDoc('docLogin', 'docTipoLogin', 'erroDocLogin');
+
+      var fone = document.getElementById('fone');
+      fone.addEventListener('input', function () {
+        fone.value = mascaraFone(fone.value);
+        fone.classList.remove('invalido');
+        document.getElementById('erroFone').classList.remove('visivel');
+      });
+
+      /* ============ QUANTIDADE + RESUMO DO PEDIDO ============ */
+      var produtoInput = document.getElementById('produto');
+      var qtyInput = document.getElementById('qtyInput');
+      var qtyMenos = document.getElementById('qtyMenos');
+      var qtyMais = document.getElementById('qtyMais');
+      var qtyUnid = document.getElementById('qtyUnid');
+      var resumo = document.getElementById('resumoPedido');
+
+      /* Bônus: se a página do produto abrir este formulário com
+         ?produto=Hikmicro+B10S, o campo já vem preenchido. */
+      var paramProduto = new URLSearchParams(window.location.search).get('produto');
+      if (paramProduto) produtoInput.value = paramProduto;
+
+      function atualizarQtdLabel() {
+        qtyUnid.textContent = parseInt(qtyInput.value, 10) === 1 ? 'unidade' : 'unidades';
+      }
+
+      function montarResumo() {
+        var nome = produtoInput.value.trim() || 'Seu produto';
+        var qtd = parseInt(qtyInput.value, 10) || 1;
+        resumo.innerHTML =
+          '<strong>Pedido:</strong> ' + nome + ' — ' +
+          qtd + (qtd === 1 ? ' unidade' : ' unidades');
+      }
+
+      qtyMenos.addEventListener('click', function () {
+        var v = parseInt(qtyInput.value, 10) || 1;
+        if (v > 1) qtyInput.value = v - 1;
+        atualizarQtdLabel();
+        montarResumo();
+      });
+
+      qtyMais.addEventListener('click', function () {
+        var v = parseInt(qtyInput.value, 10) || 1;
+        if (v < 99) qtyInput.value = v + 1;
+        atualizarQtdLabel();
+        montarResumo();
+      });
+
+      qtyInput.addEventListener('change', function () {
+        var v = parseInt(qtyInput.value, 10);
+        if (!(v >= 1)) v = 1;
+        if (v > 99) v = 99;
+        qtyInput.value = v;
+        atualizarQtdLabel();
+        montarResumo();
+      });
+
+      produtoInput.addEventListener('input', function () {
+        produtoInput.classList.remove('invalido');
+        document.getElementById('erroProduto').classList.remove('visivel');
+        montarResumo();
+      });
+
+      /* ============ SUBMIT: PEDIDO (simulado) ============ */
+      formPedido.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var prod = produtoInput;
+        var resp = document.getElementById('respNome');
+        var emp = document.getElementById('empresa');
+        var doc = document.getElementById('doc');
+        var email = document.getElementById('email');
+
+        var okProd = prod.value.trim().length >= 2;
+        var okResp = resp.value.trim().split(/\s+/).length >= 2;
+        var okEmp = emp.value.trim().length >= 2;
+        var okDoc = docValido(doc.value);
+        var okFone = validarFone(fone.value);
+        var okEmail = emailValido(email.value);
+
+        estadoCampo(prod, document.getElementById('erroProduto'), okProd);
+        estadoCampo(resp, document.getElementById('erroRespNome'), okResp);
+        estadoCampo(emp, document.getElementById('erroEmpresa'), okEmp);
+        estadoCampo(doc, document.getElementById('erroDoc'), okDoc);
+        estadoCampo(fone, document.getElementById('erroFone'), okFone);
+        estadoCampo(email, document.getElementById('erroEmail'), okEmail);
+
+        if (!(okProd && okResp && okEmp && okDoc && okFone && okEmail)) return;
+
+        /* INTEGRAÇÃO BACKEND: envie aqui o pedido
+           (produto, quantidade, resp, empresa, doc limpo, fone, email)
+           via fetch/POST. O bloco abaixo simula o sucesso. */
+        mostrarSucesso('Pedido enviado!', 'Nossa equipe confirma a disponibilidade e envia o link de pagamento para o seu e-mail e WhatsApp.');
+      });
+
+      /* ============ SUBMIT: ENTRAR (simulado) ============ */
+      formEntrar.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var emailL = document.getElementById('emailLogin');
+        var docL = document.getElementById('docLogin');
+
+        var okEmailL = emailValido(emailL.value);
+        var okDocL = docValido(docL.value);
+
+        estadoCampo(emailL, document.getElementById('erroEmailLogin'), okEmailL);
+        estadoCampo(docL, document.getElementById('erroDocLogin'), okDocL);
+
+        if (!(okEmailL && okDocL)) return;
+
+        /* INTEGRAÇÃO BACKEND: autentique aqui (email + documento). */
+        mostrarSucesso('Bem-vindo de volta!', 'Identificação confirmada. Redirecionando para a sua conta...');
+      });
+
+      /* ============ TELA DE SUCESSO ============ */
+      var sucesso = document.getElementById('sucesso');
+
+      function mostrarSucesso(titulo, texto) {
+        document.getElementById('sucessoTitulo').textContent = titulo;
+        document.getElementById('sucessoTexto').textContent = texto;
+        formPedido.classList.remove('ativo');
+        formEntrar.classList.remove('ativo');
+        tabPedido.classList.remove('ativo');
+        tabEntrar.classList.remove('ativo');
+        sucesso.hidden = false;
+      }
+
+      document.getElementById('btnVoltar').addEventListener('click', function () {
+        sucesso.hidden = true;
+        mostrarForm('pedido');
+      });
+
+      montarResumo();
+    })();
+  </script>
+
+</body>
+</html>
